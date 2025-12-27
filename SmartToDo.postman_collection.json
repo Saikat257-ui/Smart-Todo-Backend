@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "5acb4eda-5ae3-4524-bbd9-112619edbd6d",
+		"name": "SmartToDo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45630331",
+		"_collection_link": "https://saikats-org.postman.co/workspace/deepseek~3effac04-7482-4d62-9441-68edb18c8543/collection/45630331-5acb4eda-5ae3-4524-bbd9-112619edbd6d?action=share&source=collection_link&creator=45630331"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Alex_doe\",\r\n    \"email\": \"alex@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"alex@example.com\",\r\n    \"password\": \"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGVkYjVjYTdkZTE5MmZhYjk3Nzk2ZSIsImlhdCI6MTc2Njc3NTY2OCwiZXhwIjoxNzY2ODYyMDY4fQ.H4Ou8jsaiOZc9VmMI-DLp38DZlZFVouOqK_BT9hNnDc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Complete project\",\r\n    \"description\": \"Finish the API\",\r\n    \"priority\": \"high\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch all tasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGVkYjVjYTdkZTE5MmZhYjk3Nzk2ZSIsImlhdCI6MTc2Njc3NTY2OCwiZXhwIjoxNzY2ODYyMDY4fQ.H4Ou8jsaiOZc9VmMI-DLp38DZlZFVouOqK_BT9hNnDc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGVkYjVjYTdkZTE5MmZhYjk3Nzk2ZSIsImlhdCI6MTc2Njc3NTY2OCwiZXhwIjoxNzY2ODYyMDY4fQ.H4Ou8jsaiOZc9VmMI-DLp38DZlZFVouOqK_BT9hNnDc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"completed\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/tasks/{{task_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tasks",
+						"{{task_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NGVkYjVjYTdkZTE5MmZhYjk3Nzk2ZSIsImlhdCI6MTc2Njc3NTY2OCwiZXhwIjoxNzY2ODYyMDY4fQ.H4Ou8jsaiOZc9VmMI-DLp38DZlZFVouOqK_BT9hNnDc",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/tasks/{{task_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"tasks",
+						"{{task_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
