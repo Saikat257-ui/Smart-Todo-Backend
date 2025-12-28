@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { MONGODB_URI } = require('./env');
+import mongoose from 'mongoose';
+import { MONGODB_URI } from './env.js';
 
 /**
  * Connect to MongoDB database
@@ -8,7 +8,7 @@ const { MONGODB_URI } = require('./env');
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(MONGODB_URI);
-    
+
     console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`❌ MongoDB Connection Error: ${error.message}`);
@@ -17,4 +17,4 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+export default connectDB;

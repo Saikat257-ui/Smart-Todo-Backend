@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 /**
  * Task Schema
@@ -46,4 +46,4 @@ const taskSchema = new mongoose.Schema({
 // Create index on owner for faster queries
 taskSchema.index({ owner: 1 });
 
-module.exports = mongoose.model('Task', taskSchema);
+export default mongoose.model('Task', taskSchema);

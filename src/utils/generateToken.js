@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const { JWT_SECRET, JWT_EXPIRE } = require('../config/env');
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET, JWT_EXPIRE } from '../config/env.js';
 
 /**
  * Generate JWT token for user authentication
@@ -14,4 +14,4 @@ const generateToken = (userId) => {
   );
 };
 
-module.exports = generateToken;
+export default generateToken;

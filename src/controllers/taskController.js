@@ -1,5 +1,5 @@
-const { validationResult } = require('express-validator');
-const Task = require('../models/Task');
+import { validationResult } from 'express-validator';
+import Task from '../models/Task.js';
 
 /**
  * @route   POST /tasks
@@ -143,7 +143,7 @@ const deleteTask = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   createTask,
   getTasks,
   updateTask,

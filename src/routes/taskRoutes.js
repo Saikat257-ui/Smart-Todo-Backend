@@ -1,17 +1,17 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {
+import {
   createTask,
   getTasks,
   updateTask,
   deleteTask
-} = require('../controllers/taskController');
-const protect = require('../middleware/auth');
-const verifyTaskOwnership = require('../middleware/taskOwnership');
-const {
+} from '../controllers/taskController.js';
+import protect from '../middleware/auth.js';
+import verifyTaskOwnership from '../middleware/taskOwnership.js';
+import {
   createTaskValidation,
   updateTaskValidation
-} = require('../utils/validators');
+} from '../utils/validators.js';
 
 /**
  * Task Routes
@@ -28,4 +28,4 @@ router.route('/:id')
   .put(protect, verifyTaskOwnership, updateTaskValidation, updateTask)
   .delete(protect, verifyTaskOwnership, deleteTask);
 
-module.exports = router;
+export default router;

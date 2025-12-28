@@ -1,11 +1,11 @@
-const express = require('express');
-const connectDB = require('./config/db');
-const { PORT } = require('./config/env');
-const errorHandler = require('./middleware/errorHandler');
+import express from 'express';
+import connectDB from './config/db.js';
+import { PORT } from './config/env.js';
+import errorHandler from './middleware/errorHandler.js';
 
 // Import routes
-const authRoutes = require('./routes/authRoutes');
-const taskRoutes = require('./routes/taskRoutes');
+import authRoutes from './routes/authRoutes.js';
+import taskRoutes from './routes/taskRoutes.js';
 
 // Initialize Express app
 const app = express();
@@ -54,4 +54,4 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
 
-module.exports = app;
+export default app;

@@ -1,6 +1,6 @@
-const { validationResult } = require('express-validator');
-const User = require('../models/User');
-const generateToken = require('../utils/generateToken');
+import { validationResult } from 'express-validator';
+import User from '../models/User.js';
+import generateToken from '../utils/generateToken.js';
 
 /**
  * @route   POST /auth/register
@@ -108,7 +108,7 @@ const login = async (req, res, next) => {
   }
 };
 
-module.exports = {
+export {
   register,
   login
 };

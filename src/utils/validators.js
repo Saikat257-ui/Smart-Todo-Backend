@@ -1,4 +1,4 @@
-const { body } = require('express-validator');
+import { body } from 'express-validator';
 
 /**
  * Validation rules for user registration
@@ -94,7 +94,7 @@ const updateTaskValidation = [
     .withMessage('Priority must be low, medium, or high')
 ];
 
-module.exports = {
+export {
   registerValidation,
   loginValidation,
   createTaskValidation,

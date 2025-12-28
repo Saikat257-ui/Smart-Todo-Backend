@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { register, login } = require('../controllers/authController');
-const { registerValidation, loginValidation } = require('../utils/validators');
+import { register, login } from '../controllers/authController.js';
+import { registerValidation, loginValidation } from '../utils/validators.js';
 
 /**
  * Authentication Routes
@@ -13,4 +13,4 @@ router.post('/register', registerValidation, register);
 // Login user
 router.post('/login', loginValidation, login);
 
-module.exports = router;
+export default router;

@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config/env');
-const User = require('../models/User');
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET } from '../config/env.js';
+import User from '../models/User.js';
 
 /**
  * Middleware to protect routes requiring authentication
@@ -65,4 +65,4 @@ const protect = async (req, res, next) => {
   }
 };
 
-module.exports = protect;
+export default protect;

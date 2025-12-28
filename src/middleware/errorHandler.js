@@ -1,4 +1,4 @@
-const { NODE_ENV } = require('../config/env');
+import { NODE_ENV } from '../config/env.js';
 
 /**
  * Centralized error handling middleware
@@ -40,4 +40,4 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
-module.exports = errorHandler;
+export default errorHandler;

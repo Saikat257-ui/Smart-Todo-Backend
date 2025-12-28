@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Task = require('../models/Task');
+import mongoose from 'mongoose';
+import Task from '../models/Task.js';
 
 /**
  * Middleware to verify task ownership
@@ -48,4 +48,4 @@ const verifyTaskOwnership = async (req, res, next) => {
   }
 };
 
-module.exports = verifyTaskOwnership;
+export default verifyTaskOwnership;
