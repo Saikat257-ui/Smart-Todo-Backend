@@ -456,8 +456,6 @@ sequenceDiagram
     Database-->>Server: Return tasks
     Server-->>Client: Return tasks
 ```
-![alt text](/assests/images/image.png)
-
 ---
 
 ## 🛡️ Authorization Logic
