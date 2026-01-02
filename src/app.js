@@ -10,9 +10,6 @@ import taskRoutes from './routes/taskRoutes.js';
 // Initialize Express app
 const app = express();
 
-// Connect to MongoDB
-connectDB();
-
 // Middleware
 app.use(express.json()); // Body parser for JSON
 app.use(express.urlencoded({ extended: true })); // Body parser for URL-encoded data
@@ -49,9 +46,11 @@ app.use((req, res) => {
 // Error handler (must be last)
 app.use(errorHandler);
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+// Connect to MongoDB and then start server
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
 });
 
 export default app;
