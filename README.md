@@ -1,6 +1,6 @@
 # Smart ToDo API 📝
 
-A production-ready RESTful backend system for task management with **JWT authentication**, built with **clean architecture** principles and industry best practices. This API demonstrates strong fundamentals in security, scalability, and code organization—perfect for technical interviews.
+A RESTful backend system for task management with JWT authentication, built using clean architecture principles.
 
 ---
 
@@ -13,12 +13,8 @@ A production-ready RESTful backend system for task management with **JWT authent
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [API Endpoints](#api-endpoints)
-- [Authentication Flow](#authentication-flow)
 - [Authorization Logic](#authorization-logic)
 - [Code Quality Highlights](#code-quality-highlights)
-- [Assumptions & Design Decisions](#assumptions--design-decisions)
-- [Future Improvements](#future-improvements)
-- [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -28,9 +24,9 @@ The **Smart ToDo API** is a RESTful backend that allows users to:
 - **Register** and **login** securely
 - **Create**, **read**, **update**, and **delete** their own tasks
 - Manage tasks with **priority** levels and **status** tracking
-- Access tasks with **pagination** for scalability
+- Access tasks with **pagination** support for scalability
 
-Built from scratch following **interview-ready** standards: modular, well-documented, and easy to explain.
+Built from scratch following modular, well-documented, and easy to explain standards.
 
 ---
 
@@ -82,10 +78,7 @@ ToDo/
 
 ### **Why This Structure?**
 
-- **Separation of Concerns**: Each layer has a single responsibility
-- **Scalability**: Easy to add new features without touching existing code
-- **Testability**: Controllers and middleware can be unit tested independently
-- **Readability**: Clear file organization makes code review seamless
+- Clear separation of concerns for maintainability and scalability
 
 ---
 
@@ -102,11 +95,6 @@ ToDo/
 - ✅ Get all tasks for the authenticated user (paginated)
 - ✅ Update tasks (owner only)
 - ✅ Delete tasks (owner only)
-
-### **Security & Authorization**
-- ✅ Resource ownership verification
-- ✅ No access to other users' tasks
-- ✅ Token validation on every protected route
 
 ### **Error Handling**
 - ✅ Centralized error middleware
@@ -209,6 +197,9 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/smart-todo
 ### **Base URL**: `http://localhost:5000`
 
 ### **Authentication Endpoints**
+
+- 📬 A complete Postman collection with all requests and example responses is included in this repository for easy testing.
+
 
 #### 1. Register User
 ```http
@@ -394,68 +385,6 @@ Authorization: Bearer <token>
 }
 ```
 
-#### Forbidden (403)
-```json
-{
-  "success": false,
-  "message": "Not authorized to access this task"
-}
-```
-
-#### Not Found (404)
-```json
-{
-  "success": false,
-  "message": "Task not found"
-}
-```
----
-### Postman Collection URL
-
-- For testing these APIs, you can use the Postman collection available at: [SmartToDo.postman_collection.json](SmartToDo.postman_collection.json)
-
----
-
----
-
-## 🔒 Authentication Flow
-
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Server
-    participant Database
-
-    Note over Client,Database: Registration Flow
-    Client->>Server: POST /auth/register (username, email, password)
-    Server->>Server: Validate input
-    Server->>Database: Check if user exists
-    Database-->>Server: User not found
-    Server->>Server: Hash password with bcrypt
-    Server->>Database: Create user
-    Database-->>Server: User created
-    Server->>Server: Generate JWT token
-    Server-->>Client: Return user + token
-
-    Note over Client,Database: Login Flow
-    Client->>Server: POST /auth/login (email, password)
-    Server->>Database: Find user by email
-    Database-->>Server: Return user with hashed password
-    Server->>Server: Compare passwords with bcrypt
-    Server->>Server: Generate JWT token
-    Server-->>Client: Return user + token
-
-    Note over Client,Database: Protected Route Access
-    Client->>Server: GET /tasks (Authorization: Bearer <token>)
-    Server->>Server: Verify JWT token
-    Server->>Server: Decode user ID from token
-    Server->>Database: Find user by ID
-    Database-->>Server: Return user
-    Server->>Server: Attach user to request
-    Server->>Database: Fetch user's tasks
-    Database-->>Server: Return tasks
-    Server-->>Client: Return tasks
-```
 ---
 
 ## 🛡️ Authorization Logic
@@ -500,114 +429,4 @@ router.put('/:id',
 - Mongoose errors (CastError, ValidationError, Duplicate Key) handled gracefully
 - Consistent error response format
 
-### **4. Input Validation**
-- All endpoints validated using `express-validator`
-- Custom error messages for better UX
-- Email format, password strength, field lengths enforced
-
-### **5. Database Optimization**
-- Index on `Task.owner` for faster queries
-- Pagination to prevent fetching too much data
-
-### **6. Code Readability**
-- Descriptive variable and function names
-- JSDoc comments on all functions
-- Inline comments where logic isn't obvious
-
 ---
-
-## 🤔 Assumptions & Design Decisions
-
-### **Assumptions**
-1. Users have access to MongoDB (local or cloud)
-2. Testing will be done via Postman/Insomnia/curl
-3. No frontend is required
-4. Email verification is out of scope
-
-### **Design Decisions**
-
-| Decision | Rationale |
-|----------|-----------|
-| **bcryptjs over bcrypt** | Better cross-platform compatibility (no native dependencies) |
-| **Pagination only** | Keeping enhancement simple; sorting/filtering can be added later |
-| **24h JWT expiration** | Balance between security and UX; adjustable via env var |
-| **No refresh tokens** | Simplifies implementation for interview purposes |
-| **Mongoose over native driver** | Schema validation, cleaner syntax, middleware support |
-| **Express-validator** | Industry standard, flexible, great error messages |
-
-### **Trade-offs**
-- **No unit tests**: Out of scope, but structure supports easy testing
-- **Simple CORS**: Production apps should use `cors` package with whitelisting
-- **No rate limiting**: Would prevent brute-force attacks in production
-- **No logging**: Production apps should use Winston or Morgan
-
----
-
-## 🚀 Future Improvements
-
-If this were a production application, I would add:
-
-1. **Refresh Tokens**: Improve security with short-lived access tokens
-2. **Email Verification**: Send verification email on registration
-3. **Password Reset**: Forgot password flow with email tokens
-4. **Rate Limiting**: Prevent abuse with `express-rate-limit`
-5. **Logging**: Request/error logging with Winston
-6. **API Documentation**: Auto-generated docs with Swagger/OpenAPI
-7. **Unit & Integration Tests**: Jest/Mocha with Supertest
-8. **Task Filtering & Sorting**: Filter by status/priority, sort by date
-9. **Task Due Dates**: Add deadline tracking
-10. **User Profiles**: Add avatar, bio, preferences
-
----
-
-## 🔧 Troubleshooting
-
-### **Issue: "Cannot connect to MongoDB"**
-**Solution**: 
-- Ensure MongoDB is running: `mongod` (local) or check Atlas connection string
-- Verify `MONGODB_URI` in `.env` is correct
-
-### **Issue: "npm install fails"**
-**Solution**:
-- Clear npm cache: `npm cache clean --force`
-- Delete `node_modules` and `package-lock.json`, then run `npm install` again
-
-### **Issue: "Token expired" errors**
-**Solution**:
-- Login again to get a new token
-- Adjust `JWT_EXPIRE` in `.env` for longer-lived tokens
-
-### **Issue: "Duplicate key error"**
-**Solution**:
-- Username or email already exists
-- Use a different username/email or login with existing credentials
-
-### **Issue: Port 5000 already in use**
-**Solution**:
-- Change `PORT` in `.env` to another port (e.g., 3000, 8000)
-
----
-
-## 📝 License
-
-This project is open source and available under the [ISC License](https://opensource.org/licenses/ISC).
-
----
-
-## 👨‍💻 Author
-
-Built with ❤️ as a demonstration of clean architecture and RESTful API best practices.
-
-**Ready for technical interviews and code reviews!**
-
----
-
-## 🙏 Acknowledgments
-
-- Express.js community for excellent documentation
-- MongoDB team for Mongoose ODM
-- All open-source contributors
-
----
-
-**Happy Coding! 🚀**
