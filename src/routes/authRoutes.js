@@ -1,7 +1,8 @@
 import express from 'express';
-const router = express.Router();
 import { register, login } from '../controllers/authController.js';
 import { registerValidation, loginValidation } from '../utils/validators.js';
+
+const router = express.Router();
 
 /**
  * Authentication Routes
